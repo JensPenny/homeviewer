@@ -1,8 +1,11 @@
 import * as THREE from 'three';
 import * as WORLD from './world/world';
 import * as CONTROLS from './world/controls';
+import { loadHome } from './world/loader';
 
 export function startApp() {
+    const clock = new THREE.Clock();
+
     const scene = WORLD.createScene();
     const ambientLight = WORLD.createAmbientLight();
     scene.add(ambientLight);
@@ -16,15 +19,13 @@ export function startApp() {
     const canvas = renderer.domElement;
     document.body.appendChild(canvas);
 
-    // Create a Cube Mesh with basic material
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: '#813f4e' });
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
     const floor = WORLD.createFloor();
     scene.add(floor);
 
+    loadHome(scene);
+
     const controls = CONTROLS.createOrbitControls(camera, canvas);
+    //const fpscontrols = CONTROLS.createFirstPersonControls(camera, canvas);
 
     //Helpers (if needed)
     const axesHelper = new THREE.AxesHelper(2000);
@@ -32,12 +33,10 @@ export function startApp() {
 
     // Render Loop
     var render = function () {
-        requestAnimationFrame(render);
-
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-
+        let delta = clock.getDelta();
+        //fpsconstrols.update(delta);
         // Render the scene
+        requestAnimationFrame(render);
         renderer.render(scene, camera);
     };
 
