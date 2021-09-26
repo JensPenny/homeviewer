@@ -22,9 +22,9 @@ export function startApp() {
     const floor = WORLD.createFloor();
     scene.add(floor);
 
-    //HOME.loadFbxHome(scene); //Wonky, maybe due to missing materials?
+    HOME.loadFbxHome(scene); //Wonky, maybe due to missing materials?
     //HOME.loadObjHome(scene); //Works pretty well - lighting seems off
-    HOME.load3mfHome(scene); //Works the same as obj - looks a bit better with a phong material
+    //HOME.load3mfHome(scene); //Works the same as obj - looks a bit better with a phong material
     //HOME.loadStlHome(scene); //Works - but loads without the material
 
     const controls = CONTROLS.createOrbitControls(camera, canvas);
