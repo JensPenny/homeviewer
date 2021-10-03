@@ -49,7 +49,7 @@ function createPerspectiveCamera() {
     const aspectRatio = window.innerWidth / window.innerHeight;
     const camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
 
-    camera.position.set(1500, 10, 0);
+    camera.position.set(1100, 10, 0);
     camera.lookAt(0, 10, 0);
     return camera;
 }
@@ -71,6 +71,19 @@ function createDirectionalLight() {
     return directionalLight;
 }
 
+function createFlashlightSpot(camera) {
+    const flashlight = new THREE.SpotLight(0xffffff, 0.8, 250, 10);
+    camera.add(flashlight);
+    flashlight.position.set(0, 0, 0);
+    flashlight.target = camera;
+    return flashlight;
+}
+
+function createPointLight(camera) {
+    const pointLight = new THREE.PointLight(0xffffff, 1, 1000, 0.2);
+    camera.add(pointLight);
+    return pointLight;
+}
 export {
     createFloor,
     createOrthoCamera,
@@ -78,5 +91,7 @@ export {
     createRenderer,
     createAmbientLight,
     createDirectionalLight,
+    createPointLight,
+    createFlashlightSpot,
     createScene,
 };
