@@ -27,7 +27,7 @@ function createFloor() {
     return mesh;
 }
 
-function createCamera() {
+function createOrthoCamera() {
     let aspectRatio = window.innerWidth / window.innerHeight;
     let cameraWidth = 150;
     let cameraHeight = cameraWidth / aspectRatio;
@@ -41,6 +41,15 @@ function createCamera() {
         10000
     );
     camera.position.set(200, 200, 200);
+    camera.lookAt(0, 10, 0);
+    return camera;
+}
+
+function createPerspectiveCamera() {
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    const camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
+
+    camera.position.set(1500, 10, 0);
     camera.lookAt(0, 10, 0);
     return camera;
 }
@@ -62,4 +71,12 @@ function createDirectionalLight() {
     return directionalLight;
 }
 
-export { createFloor, createCamera, createRenderer, createAmbientLight, createDirectionalLight, createScene };
+export {
+    createFloor,
+    createOrthoCamera,
+    createPerspectiveCamera,
+    createRenderer,
+    createAmbientLight,
+    createDirectionalLight,
+    createScene,
+};

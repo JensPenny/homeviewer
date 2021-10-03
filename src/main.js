@@ -13,7 +13,8 @@ export function startApp() {
     const directionalLight = WORLD.createDirectionalLight();
     scene.add(directionalLight);
 
-    const camera = WORLD.createCamera();
+    //const camera = WORLD.createOrthoCamera();
+    const camera = WORLD.createPerspectiveCamera();
     const renderer = WORLD.createRenderer(scene, camera);
 
     const canvas = renderer.domElement;
