@@ -28,8 +28,8 @@ export function startApp() {
     //HOME.load3mfHome(scene); //Works the same as obj - looks a bit better with a phong material
     //HOME.loadStlHome(scene); //Works - but loads without the material
 
-    const controls = CONTROLS.createOrbitControls(camera, canvas);
-    //const fpscontrols = CONTROLS.createFirstPersonControls(camera, canvas);
+    //const controls = CONTROLS.createOrbitControls(camera, canvas);
+    const fpscontrols = CONTROLS.createFirstPersonControls(camera, canvas);
 
     //Helpers (if needed)
     const axesHelper = new THREE.AxesHelper(2000);
@@ -37,10 +37,10 @@ export function startApp() {
 
     // Render Loop
     var render = function () {
-        let delta = clock.getDelta();
-        //fpsconstrols.update(delta);
-        // Render the scene
         requestAnimationFrame(render);
+        let delta = clock.getDelta();
+        fpscontrols.update(delta);
+        // Render the scene
         renderer.render(scene, camera);
     };
 
