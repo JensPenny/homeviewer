@@ -2,6 +2,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
 
 function loadFbxHome(scene) {
@@ -36,6 +37,26 @@ function loadStlHome(scene) {
     );
 }
 
+function loadGlbHome(scene) {
+    const loader = new GLTFLoader();
+
+    loader.load(
+        '/assets/models/floorplan.glb',
+        function (gltf) {
+            //gltf.animations; // Array<THREE.AnimationClip>
+            //gltf.scene; // THREE.Group
+            //gltf.scenes; // Array<THREE.Group>
+            //gltf.cameras; // Array<THREE.Camera>
+            //gltf.asset; // Object
+            scene.add(gltf.scene);
+        },
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+        },
+        onError()
+    );
+}
+
 function onLoad(scene) {
     return function (model) {
         model.rotation.x -= THREE.MathUtils.degToRad(90);
@@ -50,4 +71,4 @@ function onError() {
     };
 }
 
-export { loadFbxHome, load3mfHome, loadObjHome, loadStlHome };
+export { loadFbxHome, load3mfHome, loadObjHome, loadStlHome, loadGlbHome };

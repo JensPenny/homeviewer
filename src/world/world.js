@@ -40,7 +40,7 @@ function createOrthoCamera() {
         0,
         10000
     );
-    camera.position.set(200, 200, 200);
+    camera.position.set(10, 0, 0);
     camera.lookAt(0, 10, 0);
     return camera;
 }
@@ -49,8 +49,8 @@ function createPerspectiveCamera() {
     const aspectRatio = window.innerWidth / window.innerHeight;
     const camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
 
-    camera.position.set(1100, 10, 0);
-    camera.lookAt(0, 10, 0);
+    camera.position.set(10, 2, 0);
+    camera.lookAt(0, 3, 0);
     return camera;
 }
 
@@ -60,6 +60,9 @@ function createRenderer(scene, camera) {
     //renderer.setClearColor(0x7a7a7a);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
+    //Physically correct lighting
+    renderer.physicallyCorrectLights = true;
+
     //Start the rendering of the scene
     renderer.render(scene, camera);
     return renderer;
@@ -67,14 +70,19 @@ function createRenderer(scene, camera) {
 
 function createDirectionalLight() {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(400, 1000, 600);
+    directionalLight.position.set(0, 1, 0);
+    directionalLight.castShadow = true;
+    //directionalLight.shadow.mapSize.width = 512;
+    //directionalLight.shadow.mapSize.height = 512;
+    //directionalLight.shadow.camera.near = 0.5;
+    //directionalLight.shadow.camera.far = 100;
     return directionalLight;
 }
 
 function createFlashlightSpot(camera) {
     const flashlight = new THREE.SpotLight(0xffffff, 0.8, 250, 10);
     camera.add(flashlight);
-    flashlight.position.set(0, 0, 0);
+    //camera.add(flashlight.target);
     flashlight.target = camera;
     return flashlight;
 }
