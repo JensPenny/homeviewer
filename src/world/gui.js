@@ -7,11 +7,11 @@ function createCameraMenu(gui, camera, itemName) {
     cameraMenu.open();
 }
 
-function createSunMenu(gui, sunPosition) {
+function createSunMenu(gui, directionalLight) {
     const sunMenu = gui.addFolder('sunlight');
-    sunMenu.add(sunPosition.sun.position, 'x', -50, 50, 0.01);
-    sunMenu.add(sunPosition.sun.position, 'y', -50, 50, 0.01);
-    sunMenu.add(sunPosition.sun.position, 'z', -50, 50, 0.01);
+    sunMenu.add(directionalLight.position, 'x', -50, 50, 0.01);
+    sunMenu.add(directionalLight.position, 'y', -50, 50, 0.01);
+    sunMenu.add(directionalLight.position, 'z', -50, 50, 0.01);
     sunMenu.open();
 }
 

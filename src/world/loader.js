@@ -43,11 +43,14 @@ function loadGlbHome(scene) {
     loader.load(
         '/assets/models/floorplan.glb',
         function (gltf) {
-            //gltf.animations; // Array<THREE.AnimationClip>
-            //gltf.scene; // THREE.Group
-            //gltf.scenes; // Array<THREE.Group>
-            //gltf.cameras; // Array<THREE.Camera>
-            //gltf.asset; // Object
+            gltf.scene.traverse(function (element) {
+                if (element instanceof THREE.Mesh) {
+                    const mesh = element;
+                    mesh.receiveShadow = true;
+                    mesh.castShadow = true;
+                }
+            });
+
             scene.add(gltf.scene);
         },
         function (xhr) {

@@ -19,7 +19,7 @@ export function startApp() {
 
     //const camera = WORLD.createOrthoCamera();
     const camera = WORLD.createPerspectiveCamera();
-    const spotLight = WORLD.createFlashlightSpot(camera);
+    //const spotLight = WORLD.createFlashlightSpot(camera);
 
     //Rotation for the light
 
@@ -47,11 +47,7 @@ export function startApp() {
     const gui = new GUI();
     MENU.createCameraMenu(gui, camera, 'reset cam');
 
-    let controllableSun = {
-        position: 0,
-        sun: WORLD.createDirectionalLight(),
-    };
-    MENU.createSunMenu(gui, controllableSun);
+    MENU.createSunMenu(gui, directionalLight);
 
     //HOME.loadFbxHome(scene); //Wonky, maybe due to missing materials?
     //HOME.loadObjHome(scene); //Works pretty well - lighting seems off
@@ -72,7 +68,7 @@ export function startApp() {
         requestAnimationFrame(render);
         let delta = clock.getDelta();
         //fpscontrols.update(delta);
-        spotLight.target.updateMatrixWorld();
+        //spotLight.target.updateMatrixWorld();
         // Render the scene
         renderer.render(scene, camera);
         stats.update();
