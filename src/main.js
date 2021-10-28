@@ -47,7 +47,7 @@ export function startApp() {
     const gui = new GUI();
     MENU.createCameraMenu(gui, camera, 'reset cam');
 
-    MENU.createSunMenu(gui, directionalLight);
+    const sunUpdateFunction = MENU.createSunMenu(gui, directionalLight);
 
     //HOME.loadFbxHome(scene); //Wonky, maybe due to missing materials?
     //HOME.loadObjHome(scene); //Works pretty well - lighting seems off
@@ -70,6 +70,7 @@ export function startApp() {
         //fpscontrols.update(delta);
         //spotLight.target.updateMatrixWorld();
         // Render the scene
+        sunUpdateFunction();
         renderer.render(scene, camera);
         stats.update();
     };

@@ -8,11 +8,22 @@ function createCameraMenu(gui, camera, itemName) {
 }
 
 function createSunMenu(gui, directionalLight) {
+    const sunData = {
+        sunPosition: 0, //sunposition in degrees (0 - 180)
+        sunMaxHeight: 5,
+    };
+    const updateSunlight = function () {
+        const angle = sunData.sunPosition * (Math.PI / 180);
+        directionalLight.position.x = sunData.sunMaxHeight * Math.cos(angle);
+        directionalLight.position.y = sunData.sunMaxHeight * Math.sin(angle);
+    };
     const sunMenu = gui.addFolder('sunlight');
-    sunMenu.add(directionalLight.position, 'x', -50, 50, 0.01);
-    sunMenu.add(directionalLight.position, 'y', -50, 50, 0.01);
-    sunMenu.add(directionalLight.position, 'z', -50, 50, 0.01);
+    sunMenu.add(sunData, 'sunPosition', 0, 180, 1);
+    //sunMenu.add(directionalLight.position, 'x', -50, 50, 0.01);
+    //sunMenu.add(directionalLight.position, 'y', -50, 50, 0.01);
+    //sunMenu.add(directionalLight.position, 'z', -50, 50, 0.01);
     sunMenu.open();
+    return updateSunlight;
 }
 
 export { createCameraMenu, createSunMenu };
