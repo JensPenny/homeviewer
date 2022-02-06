@@ -14,7 +14,7 @@ export function startApp() {
     const ambientLight = WORLD.createAmbientLight();
     scene.add(ambientLight);
 
-    const directionalLight = WORLD.createDirectionalLight();
+    const directionalLight = WORLD.createSunWithLight();
     scene.add(directionalLight);
 
     //const camera = WORLD.createOrthoCamera();

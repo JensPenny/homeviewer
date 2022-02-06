@@ -10,11 +10,12 @@ function createCameraMenu(gui, camera, itemName) {
 function createSunMenu(gui, directionalLight) {
     const sunData = {
         sunPosition: 0, //sunposition in degrees (0 - 180)
-        sunMaxHeight: 5,
+        sunMaxHeight: 300,
+        sunMaxWidth: 400,
     };
     const updateSunlight = function () {
         const angle = sunData.sunPosition * (Math.PI / 180);
-        directionalLight.position.x = sunData.sunMaxHeight * Math.cos(angle);
+        directionalLight.position.x = sunData.sunMaxWidth * Math.cos(angle);
         directionalLight.position.y = sunData.sunMaxHeight * Math.sin(angle);
     };
     const sunMenu = gui.addFolder('sunlight');

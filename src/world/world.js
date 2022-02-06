@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 function createScene() {
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color('lightblue');
     return scene;
 }
 
@@ -11,6 +12,13 @@ function createAmbientLight() {
 }
 
 function createFloor() {
+    const size = 400;
+    const geometry = new THREE.PlaneGeometry(size, size);
+    const material = new THREE.MeshPhongMaterial({ color: 'gray' });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = Math.PI * -0.5;
+
+    /* ground with texture (dark)
     const groundTexture = new THREE.TextureLoader().load('/assets/textures/floor.png');
     groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
     groundTexture.repeat.set(10000 / 100, 10000 / 50);
@@ -18,12 +26,13 @@ function createFloor() {
     groundTexture.encoding = THREE.sRGBEncoding;
 
     const groundMaterial = new THREE.MeshPhongMaterial({ map: groundTexture });
-    const geom = new THREE.PlaneBufferGeometry(10000, 10000);
+    const geom = new THREE.PlaneBufferGeometry(400, 400);
     const mesh = new THREE.Mesh(geom, groundMaterial);
 
     mesh.position.y = 0;
     mesh.rotation.x = -Math.PI / 2;
     mesh.receiveShadow = true;
+    */
     return mesh;
 }
 
@@ -68,8 +77,20 @@ function createRenderer(scene, camera) {
     return renderer;
 }
 
-function createDirectionalLight() {
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+function createSunWithLight() {
+    // use just one sphere for everything
+    const radius = 1;
+    const widthSegments = 6;
+    const heightSegments = 6;
+    const sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+
+    const sunMaterial = new THREE.MeshPhongMaterial({ emissive: 0xffff00 });
+    const sunMesh = new THREE.Mesh(sphereGeometry, sunMaterial);
+    sunMesh.scale.set(5, 5, 5); //Bigger sun pls
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    directionalLight.lookAt(0, 0, 0);
+    directionalLight.add(sunMesh);
     return directionalLight;
 }
 
@@ -92,7 +113,7 @@ export {
     createPerspectiveCamera,
     createRenderer,
     createAmbientLight,
-    createDirectionalLight,
+    createSunWithLight,
     createPointLight,
     createFlashlightSpot,
     createScene,
