@@ -49,14 +49,6 @@ function loadGlbHome(scene, name) {
                 console.log('traversing ' + element.name + ' - ' + element.type);
                 if (element instanceof THREE.Mesh) {
                     const mesh = element;
-                    console.log(
-                        'found mesh ' +
-                            element.id +
-                            ' - recShadow: ' +
-                            mesh.receiveShadow +
-                            ' | castShadow: ' +
-                            mesh.castShadow
-                    );
                     mesh.receiveShadow = true;
                     mesh.castShadow = true;
 
