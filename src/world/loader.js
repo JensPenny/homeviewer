@@ -42,6 +42,11 @@ function loadStlHome(scene) {
 function loadGlbHome(scene, name) {
     const loader = new GLTFLoader();
 
+    const manipulationable = {
+        lights: [],
+        meshes: [],
+    };
+
     loader.load(
         '/assets/models/' + name,
         function (gltf) {
@@ -53,12 +58,14 @@ function loadGlbHome(scene, name) {
                     mesh.castShadow = true;
 
                     //mesh.material = new MeshPhongMaterial({ color: '#888888' });
+                    manipulationable.meshes.push(mesh);
                 }
 
                 if (element instanceof THREE.Light) {
                     const light = element;
                     light.castShadow = false;
                     //light.visible = false;
+                    manipulationable.lights.push(light);
                 }
             });
 
@@ -69,6 +76,7 @@ function loadGlbHome(scene, name) {
         },
         onError()
     );
+    return manipulationable;
 }
 
 function onLoad(scene) {

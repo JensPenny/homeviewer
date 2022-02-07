@@ -54,7 +54,9 @@ export function startApp() {
     //HOME.load3mfHome(scene); //Works the same as obj - looks a bit better with a phong material
     //HOME.loadStlHome(scene); //Works - but loads without the material
     //HOME.loadGlbHome(scene, 'floorplan.glb');
-    HOME.loadGlbHome(scene, 'home_twofloors.glb');
+    const manipulationable = HOME.loadGlbHome(scene, 'home_twofloors.glb');
+
+    const manipulationUpdateFunction = MENU.createElementManipulationMenu(gui, manipulationable.lights);
 
     //const controls = CONTROLS.createOrbitControls(camera, canvas);
     const controls = CONTROLS.createPointerLockControls(camera, canvas);
@@ -73,6 +75,7 @@ export function startApp() {
         //spotLight.target.updateMatrixWorld();
         // Render the scene
         sunUpdateFunction();
+        manipulationUpdateFunction();
         renderer.render(scene, camera);
         stats.update();
     };

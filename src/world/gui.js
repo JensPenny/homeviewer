@@ -27,4 +27,22 @@ function createSunMenu(gui, directionalLight) {
     return updateSunlight;
 }
 
-export { createCameraMenu, createSunMenu };
+function createElementManipulationMenu(gui, lights) {
+    const manipulator = {
+        lightsVisible: true,
+    };
+
+    const updateManipulator = function () {
+        for (const light of lights) {
+            light.visible = manipulator.lightsVisible;
+        }
+    };
+
+    const manipulations = gui.addFolder('manipulations');
+    manipulations.add(manipulator, 'lightsVisible', true);
+    manipulations.open();
+
+    return updateManipulator;
+}
+
+export { createCameraMenu, createSunMenu, createElementManipulationMenu };
