@@ -58,6 +58,7 @@ function loadGlbHome(scene, name) {
                 if (element instanceof THREE.Light) {
                     const light = element;
                     light.castShadow = false;
+                    //light.visible = false;
                 }
             });
 

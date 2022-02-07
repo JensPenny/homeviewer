@@ -1,5 +1,6 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
 function createOrbitControls(camera, canvas) {
     const controls = new OrbitControls(camera, canvas);
@@ -20,4 +21,10 @@ function createFirstPersonControls(camera, canvas) {
     return controls;
 }
 
-export { createOrbitControls, createFirstPersonControls };
+function createPointerLockControls(camera, canvas) {
+    const controls = new PointerLockControls(camera, canvas);
+
+    return controls;
+}
+
+export { createOrbitControls, createFirstPersonControls, createPointerLockControls };

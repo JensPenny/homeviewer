@@ -90,7 +90,7 @@ function createSunWithLight() {
     const sunMesh = new THREE.Mesh(sphereGeometry, sunMaterial);
     sunMesh.scale.set(5, 5, 5); //Bigger sun pls
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
     directionalLight.lookAt(0, 0, 0);
     directionalLight.add(sunMesh);
     directionalLight.castShadow = true;

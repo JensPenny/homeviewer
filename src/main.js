@@ -56,7 +56,8 @@ export function startApp() {
     //HOME.loadGlbHome(scene, 'floorplan.glb');
     HOME.loadGlbHome(scene, 'home_twofloors.glb');
 
-    const controls = CONTROLS.createOrbitControls(camera, canvas);
+    //const controls = CONTROLS.createOrbitControls(camera, canvas);
+    const controls = CONTROLS.createPointerLockControls(camera, canvas);
     //const fpscontrols = CONTROLS.createFirstPersonControls(camera, canvas);
     //fpscontrols.movementSpeed = 2;
 
