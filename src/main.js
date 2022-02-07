@@ -53,7 +53,8 @@ export function startApp() {
     //HOME.loadObjHome(scene); //Works pretty well - lighting seems off
     //HOME.load3mfHome(scene); //Works the same as obj - looks a bit better with a phong material
     //HOME.loadStlHome(scene); //Works - but loads without the material
-    HOME.loadGlbHome(scene);
+    //HOME.loadGlbHome(scene, 'floorplan.glb');
+    HOME.loadGlbHome(scene, 'home_twofloors.glb');
 
     const controls = CONTROLS.createOrbitControls(camera, canvas);
     //const fpscontrols = CONTROLS.createFirstPersonControls(camera, canvas);

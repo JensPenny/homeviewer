@@ -71,6 +71,8 @@ function createRenderer(scene, camera) {
 
     //Physically correct lighting
     renderer.physicallyCorrectLights = true;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
 
     //Start the rendering of the scene
     renderer.render(scene, camera);
@@ -91,6 +93,8 @@ function createSunWithLight() {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
     directionalLight.lookAt(0, 0, 0);
     directionalLight.add(sunMesh);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.bias = -0.005;
     return directionalLight;
 }
 

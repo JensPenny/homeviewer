@@ -4,6 +4,8 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
+import { FlatShading, MeshLambertMaterial, MeshPhongMaterial } from 'three';
+import { MeshBasicMaterial } from 'three';
 
 function loadFbxHome(scene) {
     const loader = new FBXLoader();
@@ -37,17 +39,33 @@ function loadStlHome(scene) {
     );
 }
 
-function loadGlbHome(scene) {
+function loadGlbHome(scene, name) {
     const loader = new GLTFLoader();
 
     loader.load(
-        '/assets/models/floorplan.glb',
+        '/assets/models/' + name,
         function (gltf) {
             gltf.scene.traverse(function (element) {
+                console.log('traversing ' + element.name + ' - ' + element.type);
                 if (element instanceof THREE.Mesh) {
                     const mesh = element;
+                    console.log(
+                        'found mesh ' +
+                            element.id +
+                            ' - recShadow: ' +
+                            mesh.receiveShadow +
+                            ' | castShadow: ' +
+                            mesh.castShadow
+                    );
                     mesh.receiveShadow = true;
                     mesh.castShadow = true;
+
+                    //mesh.material = new MeshPhongMaterial({ color: '#888888' });
+                }
+
+                if (element instanceof THREE.Light) {
+                    const light = element;
+                    light.castShadow = false;
                 }
             });
 
