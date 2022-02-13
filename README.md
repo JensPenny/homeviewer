@@ -1,4 +1,10 @@
 # Purpose
-This is a scaffolding-project to get some three-js tests off the ground quickly. It originated from a couple of other attempts and clones of similar projects that used some older versions, like [brandflugan's repo](https://github.com/brandflugan/three-js-webpack-boilerplate).  
+Create a webviewer to traverse the model of my (renovated) home. 
 
-Most of the dependencies are the same, albeit a newer version (for now at least). The project that is included is the default spinning cube, since I didn't actually go any further yet. 
+Features: 
+* A moveable sun
+* Internal lights that can be toggled on and off
+* A lot of testing code and scaffolding for the loading of different models. 
+
+Needs: 
+* Pointerlock-controls
