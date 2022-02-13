@@ -58,8 +58,8 @@ export function startApp() {
 
     const manipulationUpdateFunction = MENU.createElementManipulationMenu(gui, manipulationable.lights);
 
-    //const controls = CONTROLS.createOrbitControls(camera, canvas);
-    const controls = CONTROLS.createPointerLockControls(camera, canvas);
+    const controls = CONTROLS.createOrbitControls(camera, canvas);
+    //const controls = CONTROLS.createPointerLockControls(camera, canvas);
     //const fpscontrols = CONTROLS.createFirstPersonControls(camera, canvas);
     //fpscontrols.movementSpeed = 2;
 
