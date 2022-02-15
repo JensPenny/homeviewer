@@ -13,8 +13,11 @@ function createBasicSunMenu(gui, directionalLight) {
         sunAngle: 0, //Sun inclination angle (-90 - 90)
         sunMaxHeight: 300,
         sunMaxWidth: 400,
+        //sunMaxHeight: 100,
+        //sunMaxWidth: 100,
     };
     const updateSunlight = function () {
+        //sunData.sunPosition += 1; todo: remove - example code
         const angle = sunData.sunPosition * (Math.PI / 180);
         const inclination = (sunData.sunAngle + 90) * (Math.PI / 180); //add 90deg to the inclination so that we can do math with 0-180 deg
 
@@ -25,13 +28,10 @@ function createBasicSunMenu(gui, directionalLight) {
         console.log(directionalLight.position);
     };
     const sunMenu = gui.addFolder('sunlight');
-    sunMenu.add(sunData, 'sunPosition', 0, 180, 1);
-    sunMenu.add(sunData, 'sunAngle', -90, 90, 1);
-    //sunMenu.add(directionalLight.position, 'x', -50, 50, 0.01);
-    //sunMenu.add(directionalLight.position, 'y', -50, 50, 0.01);
-    //sunMenu.add(directionalLight.position, 'z', -50, 50, 0.01);
+    sunMenu.add(sunData, 'sunPosition', 0, 180, 1).name('Position').onChange(updateSunlight);
+    sunMenu.add(sunData, 'sunAngle', -90, 90, 1).name('Angle').onChange(updateSunlight);
+    updateSunlight(); //Force update after creating settings
     sunMenu.open();
-    return updateSunlight;
 }
 
 function createElementManipulationMenu(gui, lights) {
@@ -46,10 +46,9 @@ function createElementManipulationMenu(gui, lights) {
     };
 
     const manipulations = gui.addFolder('manipulations');
-    manipulations.add(manipulator, 'lightsVisible', true);
+    manipulations.add(manipulator, 'lightsVisible', false).name('Mesh Lighting').onChange(updateManipulator);
+    updateManipulator();
     manipulations.open();
-
-    return updateManipulator;
 }
 
 export { createCameraMenu, createBasicSunMenu as createSunMenu, createElementManipulationMenu };

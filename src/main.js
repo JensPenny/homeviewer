@@ -44,11 +44,6 @@ export function startApp() {
     const stats = Stats();
     document.body.appendChild(stats.dom);
 
-    const gui = new GUI();
-    MENU.createCameraMenu(gui, camera, 'reset cam');
-
-    const sunUpdateFunction = MENU.createSunMenu(gui, directionalLight);
-
     //HOME.loadFbxHome(scene); //Wonky, maybe due to missing materials?
     //HOME.loadObjHome(scene); //Works pretty well - lighting seems off
     //HOME.load3mfHome(scene); //Works the same as obj - looks a bit better with a phong material
@@ -56,7 +51,10 @@ export function startApp() {
     //HOME.loadGlbHome(scene, 'floorplan.glb');
     const manipulationable = HOME.loadGlbHome(scene, 'home_twofloors.glb');
 
-    const manipulationUpdateFunction = MENU.createElementManipulationMenu(gui, manipulationable.lights);
+    const gui = new GUI();
+    MENU.createCameraMenu(gui, camera, 'reset cam');
+    MENU.createSunMenu(gui, directionalLight);
+    MENU.createElementManipulationMenu(gui, manipulationable.lights);
 
     const controls = CONTROLS.createOrbitControls(camera, canvas);
     //const controls = CONTROLS.createPointerLockControls(camera, canvas);
@@ -74,8 +72,6 @@ export function startApp() {
         //fpscontrols.update(delta);
         //spotLight.target.updateMatrixWorld();
         // Render the scene
-        sunUpdateFunction();
-        manipulationUpdateFunction();
         renderer.render(scene, camera);
         stats.update();
     };
